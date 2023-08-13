@@ -1,0 +1,12 @@
+### Create PV
+kubectl apply -f pv-cluster.yaml
+
+### Create service
+kubectl apply -f redis-cluster-service.yaml
+
+### Create redis-cluster
+kubectl apply -f redis-statefulset.yaml
+
+### validate 
+kubectl get all 
+kubectl get pvc
