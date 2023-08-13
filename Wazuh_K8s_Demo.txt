@@ -1,0 +1,49 @@
+git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.5.0 --depth=1
+cd wazuh-kubernetes
+
+wazuh/certs/indexer_cluster/generate_certs.sh
+wazuh/certs/dashboard_http/generate_certs.sh
+
+storage-class.yaml
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+
+-----------------------------------------------------------------------------------------------------------------------
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: wazuh-storage-0
+spec:
+  storageClassName: wazuh-storage
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  local:
+    path: 
+  nodeAffinity: 
+   required:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: kubernetes.io/hostname
+         operator: In
+         values:
+         - node01
+		 
+-----------------------------------------------------------------------------------------------------------------------
+node01
+/home/wazuh-storage0
+/home/wazuh-storage1
+/home/wazuh-storage2
+
+kubectl apply -f local-pv.yaml
+kubectl get pv -n wazuh
+
+kubectl apply -k envs/local-env/
+
+kubectl get namespaces | grep wazuh
+kubectl get services -n wazuh
+kubectl get deployments -n wazuh
+kubectl get statefulsets -n wazuh
+kubectl get pods -n wazuh
