@@ -1,4 +1,4 @@
-git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.5.0 --depth=1
+git clone https://github.com/wazuh/wazuh-kubernetes.git -b v4.4.5 --depth=1
 cd wazuh-kubernetes
 
 wazuh/certs/indexer_cluster/generate_certs.sh
@@ -47,3 +47,7 @@ kubectl get services -n wazuh
 kubectl get deployments -n wazuh
 kubectl get statefulsets -n wazuh
 kubectl get pods -n wazuh
+
+Rollout version
+kubectl set image deployment/wazuh-dashboard wazuh-dashboard=wazuh/wazuh-dashboard:4.5.0 -n wazuh
+kubectl rollout restart deployment/wazuh-dashboard -n wazuh 
