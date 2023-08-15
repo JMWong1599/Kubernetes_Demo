@@ -1,0 +1,27 @@
+- VMs vs Containers
+- K8s and Docker
+- Master Node: Api Server - cluster gateway, Updates and Queries, gatekeeper authentication then validates
+- Master Node: Scheduler - assigning pods to nodes respectively - kubelet  
+- Controller Manager - detects state changes or health of pods 
+- etcd - key values store of the cluster state
+       - API Server - Is the cluster healthy?
+	   - What resources are available
+	   - Did the cluster state change?
+
+- Woker Nodes - container runtime docker
+- Worker nodes: Kubelet - interact with container and nodes
+- Worker nodes: kube proxy - networking
+
+Services:
+- NodePort: the service makes an internal pod accessible on a port on the nodes
+- ClusterIP: virtual IP add. for k8s objects to communicate to each other
+- Load balancer: is a way to expose a service using a cloud provider's load balancer,
+  which distributes incoming traffic across multiple nodes in the cluster
+- ContainerPort: aka targetPort
+- Port: aka the port of the service
+- NodePort: Physical port of that node (30000-32767)
+
+Deployment: how many replicas should be running at a any given time
+            another level of abstraction for managing pods
+            declare the desired state and k8s will maintain it without the manual effort 
+Statefulsets: use specifically for scaling stateful applications
