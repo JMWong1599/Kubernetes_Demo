@@ -1,0 +1,6 @@
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+follow next commands:
+
+Installing K9s:
+brew install K9s
