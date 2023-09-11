@@ -1,0 +1,33 @@
+Create Kubernetes Cluster - Azure, 3 VMs, not Azure Kubernetes (AKS) Generated, On-prem
+
+Create Virtual Network 
+
+1. Create Master
+2. Create Worker1
+3. Create Worker2
+
+- sudo apt update
+- sudo apt install -y nano net-tools openssh-server
+- sudo systemctl enable ssh
+- sudo ufw allow ssh
+- sudo systemctl start ssh
+
+
+4. sudo swappoff -a on Master node
+5. sudo nano /etc/fstab and comment out swap
+6. sudo apt install docker.io -y
+7. sudo apt install apt-transport-https curl -y
+8. curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+9. sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+10. sudo apt update 
+11. sudo apt install kubeadm kubelet kubectl kubernetes-cni -y
+12. sudo kubeadm init 
+
+
+
+
+ mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+  
+  kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
